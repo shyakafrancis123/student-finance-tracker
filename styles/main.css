@@ -1,0 +1,119 @@
+/* Reset defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f7f7f7;
+  color: #333;
+}
+
+/* Header & Navigation */
+header {
+  background-color: #0077cc;
+  color: white;
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: 2px solid #fff;
+}
+
+/* Main content */
+main {
+  padding: 1rem;
+}
+
+/* Stats cards */
+.stats-cards {
+  display: flex;
+  flex-direction: column; /* mobile-first */
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  margin-bottom: 2rem;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Focus outlines for accessibility */
+a:focus,
+button:focus,
+input:focus {
+  outline: 2px solid #0077cc;
+  outline-offset: 2px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: #555;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .stats-cards {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}
