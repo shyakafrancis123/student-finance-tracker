@@ -5,6 +5,7 @@ import {
   validateCategory,
   checkDuplicateWords
 } from "./validators.js";
+import { addTransaction } from "./storage.js";
 
 const form = document.getElementById("transactionForm");
 
@@ -17,38 +18,37 @@ form.addEventListener("submit", (e) => {
   const date = document.getElementById("date").value.trim();
 
   let valid = true;
-
-  // Clear previous errors
   document.querySelectorAll(".error").forEach(el => el.textContent = "");
 
-  // Description
-  if (!validateDescription(description)) {
-    document.getElementById("descError").textContent = "Description cannot be empty or start/end with space.";
-    valid = false;
-  } else if (checkDuplicateWords(description)) {
-    document.getElementById("descError").textContent = "Description contains duplicate words.";
+  if (!validateDescription(description) || checkDuplicateWords(description)) {
+    document.getElementById("descError").textContent = "Invalid description.";
     valid = false;
   }
 
-  // Amount
   if (!validateAmount(amount)) {
-    document.getElementById("amountError").textContent = "Enter a valid amount (e.g. 15.50).";
+    document.getElementById("amountError").textContent = "Invalid amount.";
     valid = false;
   }
 
-  // Category
   if (!validateCategory(category)) {
-    document.getElementById("categoryError").textContent = "Category should only contain letters and spaces.";
+    document.getElementById("categoryError").textContent = "Invalid category.";
     valid = false;
   }
 
-  // Date
   if (!validateDate(date)) {
-    document.getElementById("dateError").textContent = "Enter a valid date in YYYY-MM-DD format.";
+    document.getElementById("dateError").textContent = "Invalid date format.";
     valid = false;
   }
 
   if (valid) {
+    const transaction = {
+      description,
+      amount: parseFloat(amount),
+      category,
+      date,
+    };
+
+    addTransaction(transaction);
     alert("✅ Transaction added successfully!");
     form.reset();
   }
