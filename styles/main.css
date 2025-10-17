@@ -1,3 +1,26 @@
+/* Dark mode records table color variations */
+[data-theme="dark"] .records-table th {
+    background: #128C7E;
+    color: #f1f5f9;
+}
+[data-theme="dark"] .records-table tbody tr:nth-child(even) {
+    background: rgba(37, 211, 102, 0.10);
+}
+[data-theme="dark"] .records-table tbody tr:nth-child(odd) {
+    background: #1e293b;
+}
+[data-theme="dark"] .records-table tbody tr:hover {
+    background: #075E54;
+    transition: background-color 0.2s ease;
+}
+[data-theme="dark"] .records-table td:nth-child(4) {
+    color: #25D366;
+    font-weight: 600;
+}
+[data-theme="dark"] .records-table td:nth-child(3) {
+    color: #34B7F1;
+    font-weight: 500;
+}
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -10,19 +33,19 @@
     --font-family-base: 'Inter', sans-serif; /* Clean, modern, readable */
     --font-family-heading: 'Poppins', sans-serif; /* Unique, geometric style for headings */
 
-    /* Light Theme Colors (Custom Unique Theme) */
---primary-color: #ff6b6b;       
---primary-hover: #ff4757;       
---secondary-color: #1dd1a1;     
---success-color: #10ac84;      
---warning-color: #feca57;       
---danger-color: #ee5253;        
---background-color: #fef9f9;    
---surface-color: #fff5f5;       
---border-color: #ffd6d6;        
---text-primary: #2f2f2f;        
---text-secondary: #555555;      
---text-muted: #a5a5a5;          
+    /* WhatsApp-Inspired Green Theme */
+--primary-color: #25D366;       /* WhatsApp green */
+--primary-hover: #128C7E;       /* Darker green for hover states */
+--secondary-color: #34B7F1;     /* WhatsApp blue accent */
+--success-color: #25D366;       /* Same as primary for consistency */
+--warning-color: #FFD279;       /* Soft yellow warning */
+--danger-color: #FF6B6B;        /* Soft red for errors */
+--background-color: #F0F2F5;    /* Light grey background */
+--surface-color: #FFFFFF;       /* White surface */
+--border-color: #E4E4E4;        /* Light border color */
+--text-primary: #111B21;        /* WhatsApp dark text */
+--text-secondary: #667781;      /* WhatsApp secondary text */
+--text-muted: #8696A0;          /* WhatsApp muted text */
 
 
     /* Spacing */
@@ -269,15 +292,106 @@ p {
     transition: top var(--transition-fast);
 }
 
+/* New header styles */
+.app-header {
+    background: linear-gradient(90deg, rgba(37,211,102,0.06), rgba(18,140,126,0.04));
+    border-bottom: 1px solid var(--border-color);
+    padding: var(--spacing-sm) 0;
+}
+
+.header-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.brand-mark { flex-shrink: 0; }
+
+.brand-text .logo {
+    font-size: 1.25rem;
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    display: flex;
+    gap: 6px;
+}
+
+.logo-accent { color: var(--primary-color); }
+
+.tagline { margin: 0; font-size: 0.8rem; color: var(--text-secondary); }
+
+.header-controls { display: flex; align-items: center; gap: var(--spacing-md); justify-content: flex-end; }
+
+.search-wrapper { min-width: 240px; }
+.header-search {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border-color);
+    background: var(--surface-color);
+    color: var(--text-primary);
+}
+
+.pill-nav { display: flex; gap: var(--spacing-sm); list-style: none; margin: 0; padding: 0; }
+.pill-nav .nav-link {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+.pill-nav .nav-link.active {
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-hover));
+    color: #fff;
+}
+
+.actions { display: flex; gap: var(--spacing-sm); align-items: center; }
+.theme-toggle-btn { min-width: 44px; }
+.avatar-btn { background: var(--surface-color); border: 1px solid var(--border-color); padding: 6px 8px; border-radius: 999px; }
+.avatar { display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .header-grid { grid-template-columns: 1fr; }
+    .header-controls { justify-content: space-between; width: 100%; }
+    .search-wrapper { order: 3; width: 100%; }
+    .pill-nav { display: none; }
+    .mobile-menu-toggle { display: flex; }
+}
+
+/* Dark mode adjustments for header */
+[data-theme="dark"] .app-header {
+    background: linear-gradient(90deg, rgba(2,6,23,0.2), rgba(2,6,23,0.1));
+    border-bottom-color: rgba(255,255,255,0.04);
+}
+[data-theme="dark"] .header-search { background: #0f172a; border-color: #334155; color: var(--text-primary); }
+[data-theme="dark"] .pill-nav .nav-link { color: var(--text-secondary); }
+[data-theme="dark"] .pill-nav .nav-link.active { color: #fff; }
+
 .skip-link:focus {
     top: 6px;
 }
 
 /* Container */
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
 }
 
 /* Header */
@@ -338,6 +452,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 }
 
 .mobile-menu-toggle {
@@ -350,6 +465,22 @@ header .container {
     gap: 4px;
     border-radius: var(--radius-md);
     transition: background-color var(--transition-fast);
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .main-nav {
+        display: none;
+        width: 100%;
+    }
+    
+    .main-nav.active {
+        display: block;
+    }
 }
 
 .mobile-menu-toggle:hover {
@@ -482,6 +613,20 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-2xl);
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .stat-card {
@@ -547,13 +692,15 @@ main {
 
 .progress-fill {
     height: 100%;
-    background: var(--success-color);
+    background: var(--primary-color);
     transition: width var(--transition-medium), background-color var(--transition-medium);
-    border-radius: var(--radius-lg);
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.2);
 }
 
 .progress-fill.over-budget {
     background: var(--danger-color);
+    box-shadow: 0 2px 4px rgba(255, 107, 107, 0.2);
 }
 
 .budget-status {
@@ -570,10 +717,26 @@ main {
     border: 1px solid var(--border-color);
 }
 
-.category-chart {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
+.charts-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    margin-top: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+    .charts-container {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.chart-wrapper {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.1);
+    min-height: 300px;
+    position: relative;
 }
 
 .chart-bar {
@@ -599,7 +762,8 @@ main {
     height: 100%;
     background: var(--primary-color);
     transition: width var(--transition-medium);
-    border-radius: var(--radius-sm);
+    border-radius: 20px;  /* More rounded for WhatsApp style */
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.2);  /* Subtle green shadow */
 }
 
 .chart-value {
@@ -615,12 +779,26 @@ main {
     gap: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .search-controls,
 .sort-controls {
     flex: 1;
     min-width: 250px;
+}
+
+@media (max-width: 768px) {
+    .controls-section {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .search-controls,
+    .sort-controls {
+        width: 100%;
+        min-width: unset;
+    }
 }
 
 .search-controls label,
@@ -719,6 +897,7 @@ select:invalid {
 .btn-primary {
     background: var(--primary-color);
     color: white;
+    border-radius: 20px;  /* WhatsApp-style rounded buttons */
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -730,10 +909,11 @@ select:invalid {
 .btn-secondary {
     background: var(--secondary-color);
     color: white;
+    border-radius: 20px;  /* WhatsApp-style rounded buttons */
 }
 
 .btn-secondary:hover:not(:disabled) {
-    background: #475569;
+    background: #0F8AB3;  /* Darker blue for hover */
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
 }
@@ -775,6 +955,30 @@ select:invalid {
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
     background: white;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+    .table-container {
+        display: none;
+    }
+    
+    .records-cards {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+}
+
+@media (min-width: 769px) {
+    .records-cards {
+        display: none;
+    }
+    
+    .table-container {
+        display: block;
+    }
 }
 
 .records-table {
@@ -791,13 +995,37 @@ select:invalid {
 }
 
 .records-table th {
-    background: var(--surface-color);
+    background: var(--primary-color);
     font-weight: 600;
-    color: var(--text-primary);
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+}
+
+.records-table tbody tr:nth-child(even) {
+    background: rgba(37, 211, 102, 0.05);
 }
 
 .records-table tbody tr:hover {
-    background: var(--surface-color);
+    background: rgba(37, 211, 102, 0.1);
+    transition: background-color 0.2s ease;
+}
+
+.records-table td {
+    transition: all 0.2s ease;
+}
+
+/* Style amounts in the table */
+.records-table td:nth-child(4) {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Style categories in the table */
+.records-table td:nth-child(3) {
+    color: var(--secondary-color);
+    font-weight: 500;
 }
 
 .records-table tbody tr:last-child td {
@@ -1169,6 +1397,36 @@ kbd {
     padding: var(--spacing-md);
 }
 
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 80vh;
+        margin: 10px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .modal-actions button {
+        width: 100%;
+    }
+    
+    .transaction-form {
+        width: 100%;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+}
+
 .modal.show {
     display: flex;
     animation: modalFadeIn var(--transition-medium);
@@ -1343,12 +1601,12 @@ mark {
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* Colored borders */
-.stat-card.red { border-left-color: #ff6b6b; }
-.stat-card.green { border-left-color: #10ac84; }
-.stat-card.yellow { border-left-color: #feca57; }
-.stat-card.blue { border-left-color: #1dd1a1; }
-.stat-card.purple { border-left-color: #8b5cf6; }
+/* Colored borders - WhatsApp Theme */
+.stat-card.red { border-left-color: #25D366; }     /* WhatsApp green */
+.stat-card.green { border-left-color: #128C7E; }   /* Darker green */
+.stat-card.yellow { border-left-color: #34B7F1; }  /* WhatsApp blue */
+.stat-card.blue { border-left-color: #075E54; }    /* WhatsApp dark green */
+.stat-card.purple { border-left-color: #25D366; }  /* WhatsApp green */
 
 .stat-card:hover {
     transform: translateY(-2px);

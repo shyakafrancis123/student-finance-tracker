@@ -471,7 +471,10 @@ class FinanceTracker {
 
     calculateStats(transactions) {
         const now = new Date();
-        const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7); // This ensures we get exactly 7 days back
+        sevenDaysAgo.setHours(0, 0, 0, 0); // Start from beginning of the day
+        
         const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
         
         const totalTransactions = transactions.length;
@@ -479,8 +482,23 @@ class FinanceTracker {
         
         // Last 7 days spending
         const weekSpending = transactions
-            .filter(t => new Date(t.date) >= sevenDaysAgo)
+            .filter(t => {
+                const transactionDate = new Date(t.date);
+                transactionDate.setHours(0, 0, 0, 0); // Reset time to midnight for proper comparison
+                return transactionDate >= sevenDaysAgo && transactionDate <= now;
+            })
             .reduce((sum, t) => sum + t.amount, 0);
+            
+        console.log('Last 7 days spending calculation:', {
+            sevenDaysAgo: sevenDaysAgo.toISOString(),
+            now: now.toISOString(),
+            transactions: transactions.map(t => ({
+                date: t.date,
+                amount: t.amount,
+                isIncluded: new Date(t.date) >= sevenDaysAgo && new Date(t.date) <= now
+            })),
+            weekSpending
+        });
         
         // Monthly spending
         const monthlySpending = transactions
@@ -543,30 +561,104 @@ class FinanceTracker {
     }
 
     updateCategoryChart(categoryData) {
-        const chartContainer = document.getElementById('category-chart');
-        chartContainer.innerHTML = '';
+        // Create spending line chart
+        const lineCtx = document.getElementById('spendingLineChart').getContext('2d');
+        const transactions = this.state.getTransactions();
         
-        if (categoryData.length === 0) {
-            chartContainer.innerHTML = '<p class="text-muted">No spending data available</p>';
-            return;
+        // Get last 30 days of data
+        const dates = [];
+        const spendingData = [];
+        const now = new Date();
+        for (let i = 29; i >= 0; i--) {
+            const date = new Date(now);
+            date.setDate(date.getDate() - i);
+            dates.push(date.toISOString().split('T')[0]);
+            
+            const daySpending = transactions
+                .filter(t => t.date === date.toISOString().split('T')[0])
+                .reduce((sum, t) => sum + t.amount, 0);
+            spendingData.push(daySpending);
         }
         
-        const maxAmount = Math.max(...categoryData.map(c => c.amount));
+        if (this.lineChart) {
+            this.lineChart.destroy();
+        }
         
-        categoryData.forEach(({ category, amount }) => {
-            const percentage = (amount / maxAmount) * 100;
-            
-            const barElement = document.createElement('div');
-            barElement.className = 'chart-bar';
-            barElement.innerHTML = `
-                <div class="chart-label">${category}</div>
-                <div class="chart-bar-fill">
-                    <div class="chart-bar-progress" style="width: ${percentage}%"></div>
-                </div>
-                <div class="chart-value">${this.formatCurrency(amount)}</div>
-            `;
-            
-            chartContainer.appendChild(barElement);
+        this.lineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: dates.map(d => new Date(d).toLocaleDateString()),
+                datasets: [{
+                    label: 'Daily Spending',
+                    data: spendingData,
+                    borderColor: '#25D366',
+                    backgroundColor: 'rgba(37, 211, 102, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 2,
+                    pointBackgroundColor: '#128C7E'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Daily Spending Trend (Last 30 Days)'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(37, 211, 102, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Create category pie chart
+        const pieCtx = document.getElementById('categoryPieChart').getContext('2d');
+        
+        if (this.pieChart) {
+            this.pieChart.destroy();
+        }
+        
+        this.pieChart = new Chart(pieCtx, {
+            type: 'doughnut',
+            data: {
+                labels: categoryData.map(c => c.category),
+                datasets: [{
+                    data: categoryData.map(c => c.amount),
+                    backgroundColor: [
+                        '#25D366',  // WhatsApp green
+                        '#128C7E',  // Darker green
+                        '#34B7F1',  // WhatsApp blue
+                        '#075E54',  // WhatsApp dark green
+                        '#DCF8C6'   // WhatsApp light green
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Spending by Category'
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
         });
     }
 

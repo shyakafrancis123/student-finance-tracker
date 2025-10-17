@@ -9,25 +9,57 @@
 </head>
 <body>
         
-    <header role="banner">
-        <div class="container">
-            <div class="header-content">
-                <h1 class="logo"> MY SM@RT_SPEND</h1>
-                <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                    <span class="hamburger-line"></span>
-                </button>
+    <header role="banner" class="app-header">
+        <div class="container header-grid">
+            <div class="brand">
+                <!-- Custom SVG mark for unique identity -->
+                <svg class="brand-mark" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <defs>
+                        <linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%">
+                            <stop offset="0%" stop-color="#25D366" />
+                            <stop offset="100%" stop-color="#128C7E" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="24" height="24" rx="6" fill="url(#g1)"></rect>
+                    <path d="M6 12c1.5-2 4-3 6-3s4.5 1 6 3" stroke="#fff" stroke-width="1.2" fill="none" stroke-linecap="round"></path>
+                </svg>
+                <div class="brand-text">
+                    <h1 class="logo">SM@RT<span class="logo-accent">SPEND</span></h1>
+                    <p class="tagline">Own your financial story</p>
+                </div>
             </div>
-            <nav role="navigation" aria-label="Main navigation" class="main-nav">
-                <ul class="nav-list">
-                    <li><a href="#dashboard" class="nav-link active" data-section="dashboard">MyDashboard</a></li>
-                    <li><a href="#records" class="nav-link" data-section="records">MyRecords</a></li>
-                    <li><a href="#add-transaction" class="nav-link" data-section="add-transaction">Add Transaction</a></li>
-                    <li><a href="#settings" class="nav-link" data-section="settings">Settings</a></li>
-                    <li><a href="#about" class="nav-link" data-section="about">About</a></li>
-                </ul>
-            </nav>
+
+            <div class="header-controls">
+                <div class="search-wrapper">
+                    <label for="header-search" class="sr-only">Search transactions</label>
+                    <input id="header-search" class="header-search" type="search" placeholder="Search records, categories...">
+                </div>
+
+                <nav role="navigation" aria-label="Main navigation" class="main-nav">
+                    <ul class="nav-list pill-nav">
+                        <li><a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a></li>
+                        <li><a href="#records" class="nav-link" data-section="records">Records</a></li>
+                        <li><a href="#add-transaction" class="nav-link" data-section="add-transaction">Add</a></li>
+                        <li><a href="#settings" class="nav-link" data-section="settings">Settings</a></li>
+                        <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                    </ul>
+                </nav>
+
+                <div class="actions">
+                    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text">Dark</span>
+                    </button>
+                    <button class="avatar-btn" aria-label="Open profile">
+                        <span class="avatar">FS</span>
+                    </button>
+                    <button class="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -62,10 +94,17 @@
                 </div>
 
                 
-                <!-- Simple spending chart -->
+                <!-- Spending Charts -->
                 <div class="chart-section">
-                    <h3>Spending Chart</h3>
-                    <div id="category-chart" class="category-chart"></div>
+                    <h3>Spending Trends</h3>
+                    <div class="charts-container">
+                        <div class="chart-wrapper">
+                            <canvas id="spendingLineChart"></canvas>
+                        </div>
+                        <div class="chart-wrapper">
+                            <canvas id="categoryPieChart"></canvas>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Budget Cap Section -->
@@ -358,6 +397,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
