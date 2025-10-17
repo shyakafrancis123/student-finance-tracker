@@ -87,6 +87,6 @@ The About Page
                                         * **Enter** activates or submit actions
 - There is a Maintainance for a strong color contrast between text and background for readability and accessibility
 
-*********************   demo video link is    https://youtu.be/yO81DGuay3U
+**** demo video link is  https://youtu.be/wh9FA0Qh7Ms
 
 Deployment Github Pages:: https://shyakafrancis123.github.io/student-finance-tracker/
