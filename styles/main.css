@@ -1,3 +1,25 @@
+.chart-section .chart-wrapper canvas#spendingLineChart {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.chart-section .chart-wrapper canvas#categoryPieChart {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.charts-container .chart-wrapper:last-child {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.charts-container .chart-wrapper:first-child {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
 /* Dark mode records table color variations */
 [data-theme="dark"] .records-table th {
     background: #128C7E;
@@ -717,17 +739,44 @@ main {
     border: 1px solid var(--border-color);
 }
 
+
+/* Responsive charts container: always stack vertically below 1024px */
 .charts-container {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-xl);
     margin-top: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .charts-container {
-        grid-template-columns: 2fr 1fr;
+        flex-direction: row;
+        gap: var(--spacing-xl);
     }
+    .chart-wrapper {
+        min-width: 0;
+        flex: 1 1 0;
+    }
+}
+
+.chart-wrapper {
+    background: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 2px 4px rgba(37, 211, 102, 0.1);
+    min-height: 300px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.chart-wrapper canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+    display: block;
 }
 
 .chart-wrapper {
