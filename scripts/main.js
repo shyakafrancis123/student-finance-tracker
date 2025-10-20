@@ -973,19 +973,12 @@ class FinanceTracker {
         
         // Update theme toggle button
         const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle?.querySelector('.theme-icon');
         const themeText = themeToggle?.querySelector('.theme-text');
         
-        if (themeIcon && themeText) {
-            if (theme === 'dark') {
-                themeIcon.textContent = '☀️';
-                themeText.textContent = 'Light Mode';
-                themeToggle.setAttribute('aria-label', 'Switch to light theme');
-            } else {
-                themeIcon.textContent = '🌙';
-                themeText.textContent = 'Dark Mode';
-                themeToggle.setAttribute('aria-label', 'Switch to dark theme');
-            }
+        if (themeText) {
+            const nextTheme = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            themeText.textContent = nextTheme;
+            themeToggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`);
         }
         
         // Announce theme change to screen readers
