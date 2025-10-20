@@ -24,51 +24,8 @@ everything stays on my computer in localStorage (kinda like cookies but better?)
 ## Wireframes & UI Structure
 
 Here's how I organized the key screens:
-
-### Dashboard (index.html)
-```
-+------------------+
-:    Header        :
-:  [Theme Toggle]  :
-+------------------+
-:  Stats Cards     :
-: $Total | Weekly  :
-: Budget | 7-Days  :
-+------------------+
-:  Charts         :
-: [Line: 30 days] :
-: [Doughnut: Cat] :
-+------------------+
-:  Quick Actions  :
-: [Add] [Records] :
-+------------------+
-```
-
-### Records View
-```
-+------------------+
-| Search & Filter  |
-|  [Regex Search] |
-|  [Sort Options] |
-+------------------+
-| Records Table   |
-| Date  | Desc    |
-| Cat   | Amount  |
-| [Edit][Delete]  |
-+------------------+
-```
-
-### Add/Edit Form
-```
-+------------------+
-| Transaction Form |
-|  Description    |
-|  Amount         |
-|  Category       |
-|  Date           |
-| [Save][Cancel]  |
-+------------------+
-```
+links to the pictures : https://drive.google.com/file/d/1hfbl8fivv0w95SEhlHd1drrHdWloyqYJ/view?usp=sharing
+                        https://drive.google.com/file/d/1aGghiWabln9HNud2lzZ5hcWlcGSh-Hoe/view?usp=sharing
 
 NB the website uses like the actual UI uses WhatsApp-inspired green theming, rounded corners, and subtle shadows for depth.
 
