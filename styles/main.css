@@ -52,22 +52,22 @@
 
 :root {
     /* Fonts */
-    --font-family-base: 'Inter', sans-serif; /* Clean, modern, readable */
-    --font-family-heading: 'Poppins', sans-serif; /* Unique, geometric style for headings */
+    --font-family-base: 'Inter', sans-serif; 
+    --font-family-heading: 'Poppins', sans-serif; 
 
     /* WhatsApp-Inspired Green Theme */
---primary-color: #25D366;       /* WhatsApp green */
---primary-hover: #128C7E;       /* Darker green for hover states */
---secondary-color: #34B7F1;     /* WhatsApp blue accent */
---success-color: #25D366;       /* Same as primary for consistency */
---warning-color: #FFD279;       /* Soft yellow warning */
---danger-color: #FF6B6B;        /* Soft red for errors */
---background-color: #F0F2F5;    /* Light grey background */
---surface-color: #FFFFFF;       /* White surface */
---border-color: #E4E4E4;        /* Light border color */
---text-primary: #111B21;        /* WhatsApp dark text */
---text-secondary: #667781;      /* WhatsApp secondary text */
---text-muted: #8696A0;          /* WhatsApp muted text */
+--primary-color: #25D366;       
+--primary-hover: #128C7E;       
+--secondary-color: #34B7F1;     
+--success-color: #25D366;       
+--warning-color: #FFD279;       
+--danger-color: #FF6B6B;        
+--background-color: #F0F2F5;    
+--surface-color: #FFFFFF;       
+--border-color: #E4E4E4;        
+--text-primary: #111B21;        
+--text-secondary: #667781;      
+--text-muted: #8696A0;          
 
 
     /* Spacing */
@@ -105,7 +105,6 @@
 
 /* Dark Theme
 
-/* ===============================
    DARK THEME – Coral & Mint Palette
    =============================== */
 [data-theme="dark"] {
@@ -216,18 +215,18 @@
 
 /* Dark Theme Colors (Custom Unique Theme) */
 [data-theme="dark"] {
-    --primary-color: #ff6b6b;       /* warm coral for highlights */
-    --primary-hover: #ff4757;       /* slightly darker coral on hover */
-    --secondary-color: #1dd1a1;     /* mint green for secondary actions */
-    --success-color: #10ac84;       /* success / positive feedback */
-    --warning-color: #feca57;       /* amber for warnings */
-    --danger-color: #ee5253;        /* soft red for errors */
-    --background-color: #1a1a1a;    /* dark background */
-    --surface-color: #2a2a2a;       /* card or table surfaces */
-    --border-color: #3a3a3a;        /* subtle borders */
-    --text-primary: #f5f5f5;        /* main text light for readability */
-    --text-secondary: #dcdcdc;      /* secondary text */
-    --text-muted: #999999;           /* muted text for hints / metadata */
+    --primary-color: #ff6b6b;       
+    --primary-hover: #ff4757;       
+    --secondary-color: #1dd1a1;     
+    --success-color: #10ac84;       
+    --warning-color: #feca57;       
+    --danger-color: #ee5253;        
+    --background-color: #1a1a1a;    
+    --surface-color: #2a2a2a;       
+    --border-color: #3a3a3a;        
+    --text-primary: #f5f5f5;        
+    --text-secondary: #dcdcdc;     
+    --text-muted: #999999;           
 }
 
 [data-theme="dark"] {
@@ -1651,12 +1650,11 @@ mark {
 }
 
 /* Colored borders - WhatsApp Theme */
-.stat-card.red { border-left-color: #25D366; }     /* WhatsApp green */
-.stat-card.green { border-left-color: #128C7E; }   /* Darker green */
-.stat-card.yellow { border-left-color: #34B7F1; }  /* WhatsApp blue */
-.stat-card.blue { border-left-color: #075E54; }    /* WhatsApp dark green */
-.stat-card.purple { border-left-color: #25D366; }  /* WhatsApp green */
-
+.stat-card.red { border-left-color: #25D366; }     
+.stat-card.green { border-left-color: #128C7E; }   
+.stat-card.yellow { border-left-color: #34B7F1; }  
+.stat-card.blue { border-left-color: #075E54; }    
+.stat-card.purple { border-left-color: #25D366; }  
 .stat-card:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
